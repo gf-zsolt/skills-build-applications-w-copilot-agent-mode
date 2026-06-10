@@ -1,8 +1,7 @@
 import express from "express";
-import mongoose from "mongoose";
-import { Activity, Leaderboard, Team, User, Workout } from "./models";
+import { connectDatabase } from "./config/database.js";
+import { Activity, Leaderboard, Team, User, Workout } from "./models.js";
 
-const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb://127.0.0.1:27017/octofit_db";
 const PORT = Number(process.env.PORT ?? 8000);
 const CODESPACE_NAME = process.env.CODESPACE_NAME;
 const API_BASE_URL = CODESPACE_NAME
@@ -61,8 +60,7 @@ app.get("/", (_req, res) => {
 
 async function startServer() {
   try {
-    await mongoose.connect(MONGODB_URI);
-    console.log("Connected to MongoDB:", MONGODB_URI);
+    await connectDatabase();
     app.listen(PORT, () => {
       console.log(`Backend server running at ${API_BASE_URL}`);
       console.log(`API root available at ${API_BASE_URL}/api`);
