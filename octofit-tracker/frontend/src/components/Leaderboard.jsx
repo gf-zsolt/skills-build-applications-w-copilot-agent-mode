@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { normalizeApiResponse } from './api'
 
-function Leaderboard({ apiBaseUrl }) {
+function Leaderboard({ codespaceName }) {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const url = `${apiBaseUrl}/leaderboard`
+    const host = codespaceName && codespaceName !== 'undefined'
+      ? `https://${codespaceName}-8000.app.github.dev`
+      : 'https://localhost:8000'
+    const apiBase = `${host}/api`
+    const url = `${apiBase}/leaderboard`
 
     setLoading(true)
     setError(null)
@@ -28,12 +32,12 @@ function Leaderboard({ apiBaseUrl }) {
       .finally(() => {
         setLoading(false)
       })
-  }, [apiBaseUrl])
+  }, [codespaceName])
 
   return (
     <section>
       <h2>Leaderboard</h2>
-      <p className="text-muted">Loaded from <code>{`${apiBaseUrl}/leaderboard`}</code></p>
+      <p className="text-muted">Loaded from <code>{`${url}`}</code></p>
 
       {loading && (
         <div className="spinner-border text-primary" role="status">

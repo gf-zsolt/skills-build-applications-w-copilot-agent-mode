@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { normalizeApiResponse } from './api'
 
-function Activities({ apiBaseUrl }) {
+function Activities({ codespaceName }) {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    const url = `${apiBaseUrl}/activities`
+    const host = codespaceName && codespaceName !== 'undefined'
+      ? `https://${codespaceName}-8000.app.github.dev`
+      : 'https://localhost:8000'
+    const apiBase = `${host}/api`
+    const url = `${apiBase}/activities`
 
     setLoading(true)
     setError(null)
@@ -28,12 +32,12 @@ function Activities({ apiBaseUrl }) {
       .finally(() => {
         setLoading(false)
       })
-  }, [apiBaseUrl])
+  }, [codespaceName])
 
   return (
     <section>
       <h2>Activities</h2>
-      <p className="text-muted">Loaded from <code>{`${apiBaseUrl}/activities`}</code></p>
+      <p className="text-muted">Loaded from <code>{`${url}`}</code></p>
 
       {loading && (
         <div className="spinner-border text-primary" role="status">

@@ -9,9 +9,10 @@ import './App.css'
 const rawCodespaceName = import.meta.env.VITE_CODESPACE_NAME
 const codespaceName = rawCodespaceName?.trim() ?? ''
 const isCodespace = codespaceName !== '' && codespaceName !== 'undefined'
-const apiBaseUrl = isCodespace
-  ? `https://${codespaceName}-8000.app.github.dev/api`
-  : 'http://localhost:8000/api'
+const host = isCodespace
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'https://localhost:8000'
+const apiBaseUrl = `${host}/api`
 
 function App() {
   return (
@@ -70,11 +71,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate replace to="/activities" />} />
-        <Route path="/activities" element={<Activities apiBaseUrl={apiBaseUrl} />} />
-        <Route path="/leaderboard" element={<Leaderboard apiBaseUrl={apiBaseUrl} />} />
-        <Route path="/teams" element={<Teams apiBaseUrl={apiBaseUrl} />} />
-        <Route path="/users" element={<Users apiBaseUrl={apiBaseUrl} />} />
-        <Route path="/workouts" element={<Workouts apiBaseUrl={apiBaseUrl} />} />
+        <Route path="/activities" element={<Activities codespaceName={codespaceName} />} />
+        <Route path="/leaderboard" element={<Leaderboard codespaceName={codespaceName} />} />
+        <Route path="/teams" element={<Teams codespaceName={codespaceName} />} />
+        <Route path="/users" element={<Users codespaceName={codespaceName} />} />
+        <Route path="/workouts" element={<Workouts codespaceName={codespaceName} />} />
         <Route path="*" element={<p className="text-danger">Page not found.</p>} />
       </Routes>
     </div>
