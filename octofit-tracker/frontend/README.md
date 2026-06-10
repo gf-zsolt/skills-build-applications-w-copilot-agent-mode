@@ -11,6 +11,24 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Environment configuration
+
+This frontend uses Vite environment variables with `import.meta.env`.
+
+Create a local environment file at `frontend/.env.local` with:
+
+```env
+VITE_CODESPACE_NAME=your-codespace-name
+```
+
+This value is used to construct the API base URL:
+
+```ts
+const apiBaseUrl = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api`
+```
+
+A safe fallback is used when `VITE_CODESPACE_NAME` is not defined, so the app falls back to `http://localhost:8000/api`.
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
