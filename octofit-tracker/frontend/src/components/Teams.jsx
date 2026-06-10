@@ -6,12 +6,13 @@ function Teams({ codespaceName }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const host = codespaceName && codespaceName !== 'undefined'
+    ? `https://${codespaceName}-8000.app.github.dev`
+    : 'https://localhost:8000'
+  const apiBase = `${host}/api`
+  const url = `${apiBase}/teams`
+
   useEffect(() => {
-    const host = codespaceName && codespaceName !== 'undefined'
-      ? `https://${codespaceName}-8000.app.github.dev`
-      : 'https://localhost:8000'
-    const apiBase = `${host}/api`
-    const url = `${apiBase}/teams`
 
     setLoading(true)
     setError(null)
@@ -32,7 +33,7 @@ function Teams({ codespaceName }) {
       .finally(() => {
         setLoading(false)
       })
-  }, [codespaceName])
+  }, [url])
 
   return (
     <section>
