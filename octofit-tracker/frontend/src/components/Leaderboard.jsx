@@ -6,10 +6,9 @@ function Leaderboard({ codespaceName }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const apiBase = codespaceName && codespaceName !== 'undefined'
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : 'https://localhost:8000/api'
-  const url = `${apiBase}/leaderboard`
+  const url = codespaceName && codespaceName !== 'undefined'
+    ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard`
+    : 'https://localhost:8000/api/leaderboard'
 
   useEffect(() => {
 

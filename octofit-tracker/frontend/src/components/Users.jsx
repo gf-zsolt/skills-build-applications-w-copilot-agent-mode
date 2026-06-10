@@ -6,10 +6,9 @@ function Users({ codespaceName }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const apiBase = codespaceName && codespaceName !== 'undefined'
-    ? `https://${codespaceName}-8000.app.github.dev/api`
-    : 'https://localhost:8000/api'
-  const url = `${apiBase}/users`
+  const url = codespaceName && codespaceName !== 'undefined'
+    ? `https://${codespaceName}-8000.app.github.dev/api/users`
+    : 'https://localhost:8000/api/users'
 
   useEffect(() => {
 
