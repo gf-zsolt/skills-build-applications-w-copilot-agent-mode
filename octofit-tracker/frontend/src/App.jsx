@@ -21,7 +21,7 @@ function App() {
           <div>
             <h1 className="h3">Octofit Tracker</h1>
             <p className="text-muted mb-0">
-              React 19 frontend with Vite routing and backend API support.
+              React frontend with Vite routing and backend API support.
             </p>
           </div>
           <div>
@@ -34,8 +34,7 @@ function App() {
 
       {!isCodespace ? (
         <div className="alert alert-warning">
-          <strong>Warning:</strong> <code>VITE_CODESPACE_NAME</code> is not defined.
-          The app is using a local fallback endpoint at <code>http://localhost:8000/api</code>.
+          <strong>Warning:</strong> <code>VITE_CODESPACE_NAME</code> is not defined. Using local fallback <code>http://localhost:8000/api</code>.
         </div>
       ) : null}
 
@@ -70,34 +69,13 @@ function App() {
       </nav>
 
       <Routes>
-        <Route
-          path="/"
-          element={<Navigate replace to="/activities" />}
-        />
-        <Route
-          path="/activities"
-          element={<Activities apiBaseUrl={apiBaseUrl} />}
-        />
-        <Route
-          path="/leaderboard"
-          element={<Leaderboard apiBaseUrl={apiBaseUrl} />}
-        />
-        <Route
-          path="/teams"
-          element={<Teams apiBaseUrl={apiBaseUrl} />}
-        />
-        <Route
-          path="/users"
-          element={<Users apiBaseUrl={apiBaseUrl} />}
-        />
-        <Route
-          path="/workouts"
-          element={<Workouts apiBaseUrl={apiBaseUrl} />}
-        />
-        <Route
-          path="*"
-          element={<p className="text-danger">Page not found.</p>}
-        />
+        <Route path="/" element={<Navigate replace to="/activities" />} />
+        <Route path="/activities" element={<Activities apiBaseUrl={apiBaseUrl} />} />
+        <Route path="/leaderboard" element={<Leaderboard apiBaseUrl={apiBaseUrl} />} />
+        <Route path="/teams" element={<Teams apiBaseUrl={apiBaseUrl} />} />
+        <Route path="/users" element={<Users apiBaseUrl={apiBaseUrl} />} />
+        <Route path="/workouts" element={<Workouts apiBaseUrl={apiBaseUrl} />} />
+        <Route path="*" element={<p className="text-danger">Page not found.</p>} />
       </Routes>
     </div>
   )
