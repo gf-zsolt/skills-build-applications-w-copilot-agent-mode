@@ -5,7 +5,7 @@ import { Activity, Leaderboard, Team, User, Workout } from "./models.js";
 const PORT = Number(process.env.PORT ?? 8000);
 const CODESPACE_NAME = process.env.CODESPACE_NAME;
 const API_BASE_URL = CODESPACE_NAME
-  ? `https://${CODESPACE_NAME}-8000.githubpreview.dev`
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
   : `http://localhost:${PORT}`;
 
 const app = express();
